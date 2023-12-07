@@ -1,12 +1,13 @@
 <?php
 
 // In composer.json wordt acme-namespace aan src-folder gekoppeld
-// Elk php-bestand moet een namespace hebben, geredeneerd vanuit de src-map (acne-namespace)
+// Elk php-bestand moet een namespace hebben, geredeneerd vanuit de src-map (acme-namespace)
 namespace Acme;
 
 use Acme\model\TafelModel;
 
 require "../vendor/autoload.php";
+
 ?>
 <!doctype html>
 <html>
@@ -21,10 +22,20 @@ require "../vendor/autoload.php";
 <pre>
 <?php
     // TODO: alle tafels ophalen uit de database en als hyperlinks laten zien (maak gebruik van class TafelModel)
-    // Zoiets als dit:
-    // foreach ( ... ) {
-    //      echo "<div><a href='keuze.php?idtafel={$idtafel}'>{$omschrijving}')}</div>";
-    // }
+    
+    // Een voorbeeld van hoe je de tafels kunt ophalen en weergeven:
+    $tafelModel = new \Acme\model\TafelModel();
+
+    $alleTafels = $tafelModel->getAllTafels();
+    
+    foreach ($alleTafels as $tafel) {
+        $idTafel = $tafel['idtafel'];
+        $omschrijving = $tafel['omschrijving'];
+    
+        echo "<div><a href='keuze.php?idtafel={$idTafel}'>{$omschrijving}</a></div>";
+    }
+
 ?>
+</pre>
 </body>
 </html>

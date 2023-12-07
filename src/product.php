@@ -1,9 +1,6 @@
 <?php
-
 namespace Acme;
-
 use Acme\model\ProductModel;
-
 require "../vendor/autoload.php";
 ?>
 <!doctype html>
@@ -18,31 +15,29 @@ require "../vendor/autoload.php";
 <body>
 <form action="bestellingdoorvoeren.php" method="post">
     <?php
-
-    // QUESTION: Wat doet ?? in de code-regel hier onder?
-    // Antwoord:
     $idTafel = $_GET['idtafel'] ?? false;
     if ($idTafel) {
         echo "<input type='hidden' name='idtafel' value='$idTafel'>";
-
-        // TODO: alle producten ophalen uit de database en als inputs laten zien (maak gebruik van ProductModel class)
-        // Zoiets als dit:
-        // foreach ( ... ) {
-        //      echo "<div>";
-        //      echo "<label><input type='checkbox' name='products[]' value='{$idproduct}'>{$naam}</label>";
-        //      echo "<label>Aantal:<input type='number' name='product{$idproduct}'></label>";
-        //      echo "</div>";
-        // }
+        // Fetch products from the database using the ProductModel class
+        $productModel = new ProductModel();
+        $products = $productModel->getProducts();
+        // Display products as inputs
+        foreach ($products as $product) {
+            $idproduct = $product->getColumnValue('idproduct');
+            $naam = $product->getColumnValue('naam');
+            echo "<div>";
+            echo "<label><input type='checkbox' name='products[]' value='{$idproduct}'>{$naam}</label>";
+            echo "<label>Aantal:<input type='number' name='product{$idproduct}'></label>";
+            echo "</div>";
+        }
         echo "<button>Volgende</button>";
     } else {
-        // QUESTION: Wat gebeurt hier?
-        // Antwoord:
         http_response_code(404);
         include('error_404.php');
         die();
     }
     ?>
-
 </form>
 </body>
 </html>
+  
