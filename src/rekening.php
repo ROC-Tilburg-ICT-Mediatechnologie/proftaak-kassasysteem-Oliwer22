@@ -1,20 +1,25 @@
 <?php
 
-use Acme\classes\Rekening;
+use Acme\classes\Bestelling;
 
 require "../vendor/autoload.php";
 
-$idTafel = $_GET['idtafel'] ?? null;
-if ($idTafel) {
+if ($idTafel = $_POST['idtafel'] ?? false) {
+    $selectedProducts = $_POST['products'] ?? [];
 
-    //TODO: bestelling ophalen en tonen op een mooie manier door gebruik te maken van Rekening.php
-    $rekening = new Rekening($idTafel);
+    // Create an instance of the Bestelling class
+    $bestelling = new Bestelling($idTafel);
 
+    // Add selected products to the order
+    $bestelling->addProducts($selectedProducts);
 
-    //TODO: bestelling op betaald zetten
+    // Save the order to the database
+    $bestelling->saveBestelling();
 
 } else {
     http_response_code(404);
     include('error_404.php');
     die();
 }
+
+header("Location: index.php");
