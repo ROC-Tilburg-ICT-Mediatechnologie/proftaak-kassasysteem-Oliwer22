@@ -140,3 +140,16 @@ ALTER TABLE `product_tafel`
 ALTER TABLE `tafel`
   MODIFY `idtafel` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
+--
+-- DB besteld
+--
+DROP TABLE IF EXISTS `besteld`;
+CREATE TABLE `besteld` (
+  `idproduct_tafel` int NOT NULL AUTO_INCREMENT,
+  `idtafel` int NOT NULL,
+  `idproduct` int NOT NULL,
+  `products` varchar(255) NOT NULL,
+  `betaald` tinyint(1) NOT NULL,
+  PRIMARY KEY (`idproduct_tafel`),
+  CONSTRAINT `fk_besteld_tafel` FOREIGN KEY (`idtafel`) REFERENCES `tafel` (`idtafel`) ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

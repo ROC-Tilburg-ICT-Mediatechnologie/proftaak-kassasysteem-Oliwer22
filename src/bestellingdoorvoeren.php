@@ -5,16 +5,15 @@ use Acme\classes\Bestelling;
 require "../vendor/autoload.php";
 
 if ($idTafel = $_POST['idtafel'] ?? false) {
-
     // Create an instance of the Bestelling class
     $bestelling = new Bestelling($idTafel);
 
-    // TODO: Add selected products to the order
+    // Add selected products to the order
     $selectedProducts = $_POST['products'] ?? [];
     $bestelling->addProducts($selectedProducts);
 
-    // TODO: Save the order to the database
-    $bestelling->saveBestelling(); // You need to implement this method in the Bestelling class
+    // Save the order to the database
+    $bestelling->saveBestelling();
 
     // Redirect to the index page
     header("Location: index.php");
@@ -24,3 +23,5 @@ if ($idTafel = $_POST['idtafel'] ?? false) {
     include('error_404.php');
     die();
 }
+?>
+<link rel="stylesheet" type="text/css" href="style\mainstyle.css">

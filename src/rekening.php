@@ -3,6 +3,7 @@
 use Acme\classes\Bestelling;
 
 require "../vendor/autoload.php";
+var_dump($_POST);
 
 if ($idTafel = $_POST['idtafel'] ?? false) {
     $selectedProducts = $_POST['products'] ?? [];
@@ -20,6 +21,9 @@ if ($idTafel = $_POST['idtafel'] ?? false) {
     http_response_code(404);
     include('error_404.php');
     die();
+    
 }
 
 header("Location: index.php");
+?>
+<link rel="stylesheet" type="text/css" href="style\mainstyle.css">

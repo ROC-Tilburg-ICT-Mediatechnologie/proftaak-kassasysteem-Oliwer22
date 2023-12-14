@@ -21,7 +21,7 @@ require "../vendor/autoload.php";
 <body>
 <pre>
 <?php
-    // TODO: alle tafels ophalen uit de database en als hyperlinks laten zien (maak gebruik van class TafelModel)
+    // TOsDO: alle tafels ophalen uit de database en als hyperlinks laten zien (maak gebruik van class TafelModel)
     
     // Een voorbeeld van hoe je de tafels kunt ophalen en weergeven:
     $tafelModel = new \Acme\model\TafelModel();
@@ -31,11 +31,13 @@ require "../vendor/autoload.php";
     foreach ($alleTafels as $tafel) {
         $idTafel = $tafel['idtafel'];
         $omschrijving = $tafel['omschrijving'];
-    
+        
         echo "<div><a href='keuze.php?idtafel={$idTafel}'>{$omschrijving}</a></div>";
     }
+    
 
 ?>
 </pre>
 </body>
 </html>
+<link rel="stylesheet" type="text/css" href="style\mainstyle.css">

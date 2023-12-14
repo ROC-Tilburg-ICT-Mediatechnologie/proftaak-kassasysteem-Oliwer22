@@ -45,6 +45,9 @@ class Model
             ) . ") VALUES(";
         $keys = array();
         foreach ($this->columns as $key => $value) {
+            if ($key == 'datumtijd') {
+                $value = date('Y-m-d H:i:s', $value);
+            }
             $keys[":" . $key] = $value;
         }
         $query .= implode(",", array_keys($keys)) . ")";
@@ -52,7 +55,6 @@ class Model
         $s->execute($keys);
         return $this->db->lastInsertId();
     }
-
     /**
      * Delete item
      */

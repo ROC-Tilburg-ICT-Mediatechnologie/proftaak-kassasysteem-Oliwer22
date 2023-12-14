@@ -8,18 +8,12 @@ use Acme\model\TafelModel;
 use DateTime;
 
 class Rekening
-{
-
-    public function setPaid($idTafel): void
+{public function setPaid($idTafel): void
     {
-        //TODO: de rekening voor een bepaalde tafel op betaald zetten
+        // Update the 'betaald' flag in the database for the specific table
+        $tm = new TafelModel();
+        $tm->markTableAsPaid($idTafel);
     }
-
-    /**
-     * @param $idTafel
-     *
-     * @return array
-     */
     public function getBill($idTafel): array
     {
         $bill = [];
@@ -31,27 +25,39 @@ class Rekening
         $bill['tafel'] = $tm->getTafel($idTafel);
         $bill['datumtijd'] = [
             'timestamp' => $bestelling['datumtijd'],
-            'formatted' => date(
-                'dd-mm-yyyy',
-                $bestelling['datumtijd']
-            )
+            'formatted' => date('d-m-Y', $bestelling['datumtijd']) // Fix the date format
         ];
+
         if (isset($bestelling['products'])) {
             foreach ($bestelling['products'] as $idProduct) {
-                if(!isset($bill['products'][$idProduct]['data'])) {
-                    $bill['products'][$idProduct]['data'] = (new ProductModel(
-                    ))->getProduct(
-                        $idProduct
-                    );
+                if (!isset($bill['products'][$idProduct]['data'])) {
+                    $bill['products'][$idProduct]['data'] = (new ProductModel())->getProduct($idProduct);
                 }
                 if (!isset($bill['products'][$idProduct]['aantal'])) $bill['products'][$idProduct]['aantal'] = 0;
                 $bill['products'][$idProduct]['aantal']++;
             }
         }
 
-        //TODO: 'totaal' toevoegen aan de rekening
+        // Calculate the total and add it to the bill
+        $bill['totaal'] = $this->calculateTotal($bill['products']);
 
         return $bill;
     }
 
+    /**
+     * Calculate the total based on the products and their quantities
+     *
+     * @param array $products
+     * @return float
+     */
+    private function calculateTotal(array $products): float
+    {
+        $total = 0.0;
+
+        foreach ($products as $product) {
+            $total += $product['data']['prijs'] * $product['aantal'];
+        }
+
+        return $total;
+    }
 }

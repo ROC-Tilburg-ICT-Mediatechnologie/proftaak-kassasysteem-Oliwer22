@@ -14,20 +14,20 @@ require "../vendor/autoload.php";
 </head>
 <body>
 <form action="bestellingdoorvoeren.php" method="post">
+
     <?php
     $idTafel = $_GET['idtafel'] ?? false;
     if ($idTafel) {
         echo "<input type='hidden' name='idtafel' value='$idTafel'>";
-        // Fetch products from the database using the ProductModel class
         $productModel = new ProductModel();
         $products = $productModel->getProducts();
-        // Display products as inputs
         foreach ($products as $product) {
             $idproduct = $product->getColumnValue('idproduct');
             $naam = $product->getColumnValue('naam');
             echo "<div>";
-            echo "<label><input type='checkbox' name='products[]' value='{$idproduct}'>{$naam}</label>";
-            echo "<label>Aantal:<input type='number' name='product{$idproduct}'></label>";
+            echo "<label><input type='checkbox' name='products[]' value='{$idproduct}'> {$naam} </label>";
+            
+            echo "<label>Aantal: <input type='number' name='product{$idproduct}'></label>";
             echo "</div>";
         }
         echo "<button>Volgende</button>";
@@ -40,4 +40,6 @@ require "../vendor/autoload.php";
 </form>
 </body>
 </html>
+<link rel="stylesheet" type="text/css" href="style\mainstyle.css">
+
   
