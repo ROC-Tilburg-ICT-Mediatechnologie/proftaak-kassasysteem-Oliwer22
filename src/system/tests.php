@@ -1,52 +1,28 @@
 <?php
+// TEST
 
 namespace Acme\system;
 
-use PDO;
-use PDOStatement;
+require "../../vendor/autoload.php";
 
-class Database
-{
-    private static $instance;
-    private $pdo;
+echo "<pre>";
 
-    private function __construct(PDO $pdo)
-    {
-        $this->pdo = $pdo;
-    }
+////////////////////////////////////////////////////////////////////////////
+// TEST class DotEnv
+$envDirectoryPath = __DIR__ . '/../..'; // Assuming .env is in the parent directory
 
-    public static function getInstance(PDO $pdo): Database
-    {
-        if (!self::$instance) {
-            self::$instance = new self($pdo);
-        }
+$env = new DotEnv($envDirectoryPath);
+$env->load();
+var_dump($_ENV);
 
-        return self::$instance;
-    }
+echo "<br><br>";
 
-    public function getPreparedStatement(string $query): PDOStatement
-    {
-        return $this->pdo->prepare($query);
-    }
-}
-
-// ...
-
-// Use environment variables for database connection
-$dbHost = $_ENV['DB_HOST'];
-$dbPort = $_ENV['DB_PORT'];
-$dbName = $_ENV['DB_DATABASE'];
-$dbUser = $_ENV['DB_USERNAME'];
-$dbPass = $_ENV['DB_PASSWORD'];
-
-// Create an instance of PDO using environment variables
-$pdo = new PDO("mysql:host=$dbHost;port=$dbPort;dbname=$dbName", $dbUser, $dbPass);
-
-// Create an instance of the Database class
-$db = Database::getInstance($pdo);
-
-// Example usage of getPreparedStatement method
-$prep = $db->getPreparedStatement('SELECT * FROM tafel WHERE idtafel = :idtafel');
+////////////////////////////////////////////////////////////////////////////
+// TEST class Database
+$db = Database::getInstance($envDirectoryPath);
+$prep = $db->getPreparedStatement(
+    'SELECT * FROM tafel WHERE idtafel = :idtafel'
+);
 $prep->execute(array(':idtafel' => 3));
 var_dump($prep->fetchAll());
 

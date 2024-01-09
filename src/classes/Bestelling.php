@@ -1,7 +1,7 @@
 <?php
 
 namespace Acme\classes;
-use Dotenv\Dotenv;
+
 use DateTime;
 use PDO;
 
@@ -93,45 +93,19 @@ class Bestelling
     }
     public function fetchProductDetails(int $productId)
     {
-        // Replace this with your actual database connection parameters for products
-        $productPdo = new PDO('mysql:host=localhost;dbname=kassasysteem', 'AxxcMainDev', 'GbXH85WN6VIOAAZE');
+        echo "Fetching details for product ID: $productId\n"; // Add this line for debugging
     
-        // Replace this with your actual database query to fetch product details
-        $productQuery = "SELECT naam, prijs FROM product WHERE id = ?";
-        $productStmt = $productPdo->prepare($productQuery);
-        $productStmt->bindParam(1, $productId, PDO::PARAM_INT);
-        $productStmt->execute();
+        $query = "SELECT naam, prijs FROM product WHERE id = ?";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(1, $productId, PDO::PARAM_INT);
+        $stmt->execute();
     
-        // Fetch the result as an associative array
-        $productDetails = $productStmt->fetch(PDO::FETCH_ASSOC);
+        $productDetails = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        if ($productDetails === false) {
-            return false;
-        }
+        var_dump($productDetails); // Add this line for debugging
     
-        // Replace this with your actual database connection parameters for orders
-        $orderPdo = new PDO('mysql:host=localhost;dbname=kassasysteem', 'AxxcMainDev', 'GbXH85WN6VIOAAZE');
-    
-        // Replace this with your actual database query to fetch order details
-        $orderQuery = "SELECT * FROM product WHERE idproduct = ?";
-        $orderStmt = $orderPdo->prepare($orderQuery);
-        $orderStmt->bindParam(1, $productId, PDO::PARAM_INT);
-        $orderStmt->execute();
-    
-        // Fetch the result as an associative array
-        $orderDetails = $orderStmt->fetch(PDO::FETCH_ASSOC);
-    
-        if ($orderDetails === false) {
-            return false;
-        }
-    
-        // Combine product and order details and return
-        return [
-            'product' => $productDetails,
-            'order' => $orderDetails,
-        ];
+        return $productDetails !== false ? $productDetails : false;
     }
     
-    
-    
 }
+$query = "SELECT naam, prijs FROM product WHERE id = ?";
