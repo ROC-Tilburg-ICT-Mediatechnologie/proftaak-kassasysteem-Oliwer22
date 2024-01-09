@@ -13,7 +13,7 @@ final class Database extends PDO
     protected static $instance;
     private static ?array $env = null; // Vraagteken betekent: $env is NULLABLE: moet array OF NULL zijn
 
-    //A cache to hold prepared statements
+    // A cache to hold prepared statements
     protected $cache;
 
     /**
@@ -23,7 +23,7 @@ final class Database extends PDO
      */
     public static function getInstance($envpath): Database
     {
-        if ( ! self::$instance) {
+        if (!self::$instance) {
             self::$instance = new Database($envpath);
         }
         return self::$instance;
@@ -31,9 +31,11 @@ final class Database extends PDO
 
     public function __construct($envpath)
     {
-        //Database connection data uit .env-bestand lezen als nog niet gedaan
+        // Database connection data uit .env-bestand lezen als nog niet gedaan
         if (is_null(self::$env)) {
-            (new DotEnv($envpath))->load();
+            $dotEnv = new DotEnv(__DIR__ . '/../../'); // Instantiate DotEnv here
+            $dotEnv->load();
+
             $connection = getenv("DB_CONNECTION");
             $host = getenv("DB_HOST");
             $port = getenv("DB_PORT");
@@ -62,7 +64,7 @@ final class Database extends PDO
     public function getPreparedStatement($query): PDOStatement
     {
         $hash = md5($query);
-        if ( ! isset($this->cache[$hash])) {
+        if (!isset($this->cache[$hash])) {
             $this->cache[$hash] = $this->prepare($query);
         }
         return $this->cache[$hash];

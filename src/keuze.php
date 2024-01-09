@@ -15,7 +15,8 @@ if ($idTafel) {
     echo "<p>ID Tafel: {$idTafel}</p>";
     
     echo "<div><a href='product.php?idtafel={$idTafel}'>Toevoegen</a></div>";
-    echo "<div><a href='rekening.php?idtafel={$idTafel}'>Afrekenen</a></div>";
+    echo "<div><a href='rekening.php?idtafel={$idTafel}'>Afrekenen</a></div>
+    ";
     
     
 } else {

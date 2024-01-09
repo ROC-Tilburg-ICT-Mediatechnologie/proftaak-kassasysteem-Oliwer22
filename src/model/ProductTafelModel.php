@@ -27,14 +27,17 @@ class ProductTafelModel extends Model
      */
     public function saveBestelling(array $bestelling): int
     {
+        $result = 0;
+    
         foreach ($bestelling['products'] as $idProduct) {
             $this->setColumnValue('idtafel', $bestelling['idtafel']);
             $this->setColumnValue('datumtijd', $bestelling['datetime']);
             $this->setColumnValue('betaald', 0);
             $this->setColumnValue('idproduct', $idProduct);
-            return $this->save();
+            $result += $this->save(); // Accumulate the results
         }
-        return 0;
+    
+        return $result;
     }
 
     /**
@@ -62,4 +65,5 @@ class ProductTafelModel extends Model
         }
         return $bestelling;
     }
+    
 }

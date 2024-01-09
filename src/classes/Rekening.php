@@ -8,13 +8,15 @@ use Acme\model\TafelModel;
 use DateTime;
 
 class Rekening
-{public function setPaid($idTafel): void
+{
+    public function setPaid($idTafel): void
     {
         // Update the 'betaald' flag in the database for the specific table
         $tm = new TafelModel();
         $tm->markTableAsPaid($idTafel);
     }
-    public function getBill($idTafel): array
+
+    public function getBill($idTafel)
     {
         $bill = [];
         $bm = new ProductTafelModel();

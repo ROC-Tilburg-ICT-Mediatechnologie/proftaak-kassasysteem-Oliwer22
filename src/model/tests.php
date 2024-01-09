@@ -11,14 +11,14 @@ echo "<pre>";
 
 ////////////////////////////////////////////////////////////////////////////
 // TEST class Model
-$model = new Model(Database::getInstance('../../.env'));
+$model = new Model(Database::getInstance('../.env'));
 var_dump($model);
 
 echo "<br><br>";
 
 ////////////////////////////////////////////////////////////////////////////
 /// // TEST class TafelModel
-$tm = new TafelModel(Database::getInstance('../../.env'));
+$tm = new TafelModel(Database::getInstance('../.env'));
 $tafels = $tm->get(
     'SELECT * FROM tafel WHERE idtafel > :idtafel',
     ['idtafel' => 1]
@@ -31,7 +31,7 @@ echo "<br><br>";
 
 ////////////////////////////////////////////////////////////////////////////
 // TEST class ProductModel
-$pm = new ProductModel(Database::getInstance('../../.env'));
+$pm = new ProductModel(Database::getInstance('../.env'));
 
 $producten = $pm->getAll();
 foreach ($producten as $product) {
@@ -66,7 +66,7 @@ echo "<br><br>";
 
 ////////////////////////////////////////////////////////////////////////////
 // TEST class ProductTafelModel
-$ptm = new ProductTafelModel(Database::getInstance('../../.env'));
+$ptm = new ProductTafelModel(Database::getInstance('../.env'));
 echo "--------------------------------";
 $productentafel = $ptm->getBestelling(3);
 var_dump($productentafel);

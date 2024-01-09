@@ -1,27 +1,33 @@
 <?php
 
 use Acme\classes\Bestelling;
+use Acme\system\Database; // Assuming you have a Database class
 
 require "../vendor/autoload.php";
 
 if ($idTafel = $_POST['idtafel'] ?? false) {
-    // Create an instance of the Bestelling class
-    $bestelling = new Bestelling($idTafel);
+    $envPath = '../.env'; // Set the path to your .env file
+    $pdo = Database::getInstance($envPath);
+    $bestelling = new Bestelling($idTafel, $pdo);
 
-    // Add selected products to the order
-    $selectedProducts = $_POST['products'] ?? [];
-    $bestelling->addProducts($selectedProducts);
+    // Haal de geselecteerde producten op uit het formulier
+    $products = $_POST['products'] ?? [];
 
-    // Save the order to the database
+    // Voeg de geselecteerde producten toe aan de bestelling
+    foreach ($products as $productId) {
+        $quantity = $_POST['product' . $productId] ?? 1;
+        for ($i = 0; $i < $quantity; $i++) {
+            $bestelling->addProduct($productId);
+        }
+    }
+
+    // Sla de bestelling op in de database
     $bestelling->saveBestelling();
 
-    // Redirect to the index page
-    header("Location: index.php");
-    exit();
 } else {
     http_response_code(404);
     include('error_404.php');
     die();
 }
-?>
-<link rel="stylesheet" type="text/css" href="style\mainstyle.css">
+
+header("Location: index.php");
