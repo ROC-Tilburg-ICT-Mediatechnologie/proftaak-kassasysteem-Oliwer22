@@ -3,6 +3,7 @@
 namespace Acme\model;
 
 use Acme\system\Database;
+use Dotenv\Dotenv;
 
 class TafelModel extends Model
 {

@@ -1,8 +1,0 @@
-:root {
-    --basic-font-fam: Arial, Helvetica, sans-serif;
-    --smooth-transition-ms:600ms;
-}
-* {
-    font-family: var(--basic-font-fam);
-    text-decoration: none;
-}

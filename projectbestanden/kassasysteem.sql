@@ -27,7 +27,7 @@
   CREATE TABLE `product` (
     `idproduct` int NOT NULL,
     `naam` varchar(255) NOT NULL,
-    `prijs` int NOT NULL
+    `prijs` varchar(255) NOT NULL
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
   --

@@ -15,25 +15,20 @@ require "../vendor/autoload.php";
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Kiezen tafel</title>
-    <link rel="stylesheet" type="text/css" href="style/mainstyle.css">
+    <link rel="stylesheet" type="text/css" href="style/indexstyle.css">
+
 </head>
 <body>
-<pre>
-<?php
-    // TOsDO: alle tafels ophalen uit de database en als hyperlinks laten zien (maak gebruik van class TafelModel)
-    
-    // Een voorbeeld van hoe je de tafels kunt ophalen en weergeven:
-    $tafelModel = new TafelModel();
 
+<?php
+    $tafelModel = new TafelModel();
     $alleTafels = $tafelModel->getAllTafels();
-    
     foreach ($alleTafels as $tafel) {
         $idTafel = $tafel['idtafel'];
         $omschrijving = $tafel['omschrijving'];
-        
-        echo "<div><a href='keuze.php?idtafel={$idTafel}'>{$omschrijving}</a></div>";
+        echo "<div><a class='tafelnr' href='keuze.php?idtafel={$idTafel}'>Tafel NR. {$omschrijving}</a></div>";
     }
 ?>
-</pre>
+
 </body>
 </html>
