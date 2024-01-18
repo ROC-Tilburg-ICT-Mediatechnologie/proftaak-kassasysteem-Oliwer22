@@ -70,13 +70,15 @@ class Bestelling
     }
     private function fetchProductPriceFromDatabase($productId): float
     {
-        // Replace this with your actual logic to fetch the product price from the database
-        // Example: querying the ProductTafelModel to get the price
-        $productModel = new ProductTafelModel(); // Replace with your actual ProductTafelModel class
+        // Use the ProductTafelModel to fetch the product price
+        $productModel = new \Acme\model\ProductTafelModel($this->pdo);
+        
         $product = $productModel->getProductById($productId);
 
-        return $product['price'] ?? 0.0;
-    }
+
+
+        return $product['prijs'] ?? 0.0;
+    } 
     public function getTotalPrice(): float
     {
         // Fetch prices of selected products from the database and calculate total price
@@ -93,19 +95,29 @@ class Bestelling
     }
     public function fetchProductDetails(int $productId)
     {
-        echo "Fetching details for product ID: $productId\n"; // Add this line for debugging
     
-        $query = "SELECT naam, prijs FROM product WHERE id = ?";
+        // Adjust the SQL query to match your database schema
+        $query = "SELECT naam, prijs FROM product WHERE idproduct = ?";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindParam(1, $productId, PDO::PARAM_INT);
         $stmt->execute();
     
         $productDetails = $stmt->fetch(PDO::FETCH_ASSOC);
     
-        var_dump($productDetails); // Add this line for debugging
     
         return $productDetails !== false ? $productDetails : false;
     }
     
+    
+    public function getProductById(int $productId)
+    {
+        // Implement your logic to fetch product details by ID
+        $query = "SELECT naam, prijs FROM product WHERE idproduct = ?";
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindParam(1, $productId, PDO::PARAM_INT);
+        $stmt->execute();
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }
-$query = "SELECT naam, prijs FROM product WHERE id = ?";

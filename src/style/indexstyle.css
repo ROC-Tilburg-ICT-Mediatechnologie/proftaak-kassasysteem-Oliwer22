@@ -1,0 +1,42 @@
+:root {
+    --basic-font-fam: Arial, Helvetica, sans-serif;
+    --smooth-transition-ms: 600ms;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body, h1, h2, p, a {
+    margin: 0;
+    padding: 10px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.tafelnr {
+    display: inline-block; 
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.tafelnr:hover {
+    background-color: #2980b9;
+}
+.title{
+    font-size: 2rem;
+}

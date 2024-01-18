@@ -13,7 +13,7 @@ echo "<pre>";
 // TEST class Bestelling
 
 // Create an instance of PDO (replace with your actual database connection parameters)
-$pdo = new PDO('mysql:host=localhost;dbname=kassasysteem', 'AxxcMainDev', 'GbXH85WN6VIOAAZE');
+$pdo = new PDO('mysql:host=localhost;dbname=kassasysteem', 'MainDev', 'GbXH85WN6VIOAAZE');
 
 $bestelling = new Bestelling(3, $pdo);
 
