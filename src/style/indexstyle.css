@@ -10,7 +10,11 @@
 }
 body, h1, h2, p, a {
     margin: 0;
+<<<<<<< HEAD
     padding: 10px;
+=======
+    padding: 0;
+>>>>>>> e4e4fac0033a616574f7abca4a3a9731d3f381af
 }
 
 body {
@@ -25,8 +29,14 @@ body {
 }
 
 .tafelnr {
+<<<<<<< HEAD
     display: inline-block; 
     padding: 10px;
+=======
+    display: inline-block; /* Change from 'block' to 'inline-block' */
+    padding: 10px;
+    margin-left: 20px;
+>>>>>>> e4e4fac0033a616574f7abca4a3a9731d3f381af
     margin-top: 20px;
     background-color: #3498db;
     color: #ffffff;
@@ -37,6 +47,9 @@ body {
 .tafelnr:hover {
     background-color: #2980b9;
 }
+<<<<<<< HEAD
 .title{
     font-size: 2rem;
 }
+=======
+>>>>>>> e4e4fac0033a616574f7abca4a3a9731d3f381af

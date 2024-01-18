@@ -23,11 +23,17 @@ require "../vendor/autoload.php";
 <?php
     $tafelModel = new TafelModel();
     $alleTafels = $tafelModel->getAllTafels();
+<<<<<<< HEAD
     echo '<p class="title">Kies een Tafel voor een bestelling</p>';
     foreach ($alleTafels as $tafel) {
         $idTafel = $tafel['idtafel'];
         $omschrijving = $tafel['omschrijving'];
         
+=======
+    foreach ($alleTafels as $tafel) {
+        $idTafel = $tafel['idtafel'];
+        $omschrijving = $tafel['omschrijving'];
+>>>>>>> e4e4fac0033a616574f7abca4a3a9731d3f381af
         echo "<div><a class='tafelnr' href='keuze.php?idtafel={$idTafel}'>Tafel NR. {$omschrijving}</a></div>";
     }
 ?>
