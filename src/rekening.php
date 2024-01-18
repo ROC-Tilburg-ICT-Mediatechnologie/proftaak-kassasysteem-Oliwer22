@@ -32,17 +32,19 @@ if ($idTafel) {
                 echo "<p>Product details not available for ID: {$productId}</p>";
             }
         }
+        echo "<p class='tabel'>Bestelling van tafel: {$idTafel}</p>";
         foreach ($itemQuantities as $productName => $quantity) {
             echo "<p>{$productName} (X: {$quantity}) - {$itemPrices[$productName]} 
             </p>";
         }
-        echo "<p>Total Items: {$totalCount}</p>";
-        echo "<p>Total Price: {$totalPrice}</p>";
-        echo "<form action='process_payment.php' method='post'>";
+        echo "<p>Totaal Besteld: {$totalCount}</p>";
+        echo "<p>Te betalen: {$totalPrice} €</p>";
+        echo "<form id='paymentForm' action='process_payment.php' method='post'>";
         echo "<input type='hidden' name='idtafel' value='{$idTafel}'>";
-        echo "<a href='keuze.php?idtafel={$idTafel}'>Go Back</a>";
-        echo "<input type='submit' name='confirmPayment' value='Confirm Payment'>";
+        echo "<a class='stop' href='keuze.php?idtafel={$idTafel}'>Treug</a>";
+        echo "<a class='confirm' href='#' onclick='submitForm()'>Confirm</a>";
         echo "</form>";
+        
     } catch (\Exception $e) {
         echo "Error fetching order details: " . $e->getMessage();
         die();
@@ -52,4 +54,8 @@ if ($idTafel) {
     include('error_404.php');
     die();
 }
-?>
+?><script>
+function submitForm() {
+    document.getElementById('paymentForm').submit();
+}
+</script><link rel="stylesheet" type="text/css" href="style/rekening.css">

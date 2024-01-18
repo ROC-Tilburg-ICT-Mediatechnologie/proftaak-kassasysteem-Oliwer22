@@ -7,53 +7,59 @@ body {
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    font-size: 1.2rem;
+    margin-bottom: 0px;
+    color: #333;
 }
 p{
-    padding-left: 20px;
+padding-left: 20px;
+padding-top: 20px;
 }
-.container {
-    max-width: 960px;
-    margin: 0 auto;
+.form-container {
+    margin: 20px auto;
     padding: 20px;
+}
+.form-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.form-item {
+    width: calc(20% - 20px);
+    margin-bottom: 20px;
 }
 .tabel {
     font-size: 2rem;
     margin: 0;
     padding: 20px;
 }
-.button-container {
-    margin-top: 20px;
-}
-.button-container a {
+.confirm {
     display: inline-block;
     padding: 10px;
     margin-left: 20px;
     text-decoration: none;
     border-radius: 5px;
     transition: background-color var(--smooth-transition-ms), color var(--smooth-transition-ms);
-}
-.button-container a.toevoegen {
     background-color: #0f1214;
-    border: #3498db 2px solid;
-    color: #3498db;
+    border: #39db34 2px solid;
+    color: #39db34;
 }
-.button-container a.stop {
+.confirm:hover {
+    background-color: #39db34;
+    color: #f4f4f4;
+}
+.stop {
+    display: inline-block;
+    padding: 10px;
+    margin-left: 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color var(--smooth-transition-ms), color var(--smooth-transition-ms);
     background-color: #0f1214;
     border: #f32727 2px solid;
     color: #f32727;
 }
-.button-container a:hover {
-    background-color: #2980b9;
-    color: #f4f4f4;
-}
-.button-container a.stop:hover {
+a.stop:hover {
     background-color: #f32727;
     color:#f4f4f4;
-}
-.product-name,
-.total-items,
-.total-price {
-    font-size: 1.2rem;
-    margin-bottom: 10px;
-    color: #333; 
 }
